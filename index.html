@@ -11,24 +11,67 @@
 </head>
     
 <body>
-    <div class = "header">
-        <div id = "timer"> Time left: </div>
-        <div id = "high score"> High Score: </div>
+    <div class="navbarHeader">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a onclick="renderEnd()" class="nav-link" href=""><span
+                                class="sr-only"></span></a>
+                    </li>
+                </ul>
+                <div class="navbar-texttext-dark time">
+                    Time Left:
+                </div>
+            </div>
+        </nav>
+
+    <div class ="row">
+        <h3 id="instructions">Click on start!</h3>
     </div>
     <div class = "container">
         <div id = "question-container" class = "hide">
             <div id = "question"> Question </div>
             <div id = "answer-btn" class = "btn-grid">
-                <button class = "btn"> Choice 1</button>
-                <button class = "btn"> Choice 2</button>
-                <button class = "btn"> Choice 3</button>
-                <button class = "btn"> Choice 4</button>
+                <button class = "btn" id = "answerOne"> Answer 1</button>
+                <button class = "btn" id = "answerTwo"> Answer 2</button>
+                <button class = "btn" id = "answerThree"> Answer 3</button>
+                <button class = "btn" id = "answerFour"> Answer 4</button>
+            </div>
+            <div class="result-div">
+                <h4 class="result-h4"></h4>
             </div>
         </div>
-        <div class = "controls">
             <button id = "start-btn" class="start-btn btn"> Start </button>
         </div>
+
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-6 ml-auto text-center">
+                    <div class="card">
+                        <p id="scoreBoard"></p>
+                        <div class="card-body">
+                            <p class="card-text">Score:</p>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+         
+
+            <div id="highscores" style = "display : none">
+                <h2>Quiz Complete</h2>
+                <h3 id="finalScore"></h3>
+                <form>
+                    <div class="form-group">
+                        <label for="userName">Enter Your Name</label>
+                        <input type="text" class="form-control" id="userName">
+                    </div>
+                </form>
+            </div>
     </div>
+    
     <script src="./script.js"></script>
 </body>
 </html>
