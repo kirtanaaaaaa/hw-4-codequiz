@@ -4,74 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+  <title>Code Quiz!</title>
   <link href = "style.css" rel= "stylesheet">
-  
-  <title> Code Quiz! </title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-    
 <body>
-    <div class="navbarHeader">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="collapse navbar-collapse" id="navbarText">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a onclick="renderEnd()" class="nav-link" href=""><span
-                                class="sr-only"></span></a>
-                    </li>
-                </ul>
-                <div class="navbar-texttext-dark time">
-                    Time Left:
-                </div>
-            </div>
-        </nav>
-
-    <div class ="row">
-        <h3 id="instructions">Click on start!</h3>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <span class="navbar-brand mb-0 h1">Code Quiz</span>
+        <div class="navbar-texttext-light time" id="timer">
+            Time Left:
+        </div>
+      </nav>
+    <div class="jumbotron" id = "intro">
+        <h1 class="display-4" id = "welcome">Welcome to the code quiz!</h1>
+        <p class="lead" id = "directions">Click start below to begin.If you answer incorrectly, time will be subtracted.</p>
+        <hr class="my-4">
+        <p id = "directions"> Goodluck! </p>
+        <button type = "button" class = "btn btn-info btn-lg" id = "start-btn"> Start</button>
     </div>
     <div class = "container">
         <div id = "question-container" class = "hide">
             <div id = "question"> Question </div>
-            <div id = "answer-btn" class = "btn-grid">
-                <button class = "btn" id = "answerOne"> Answer 1</button>
-                <button class = "btn" id = "answerTwo"> Answer 2</button>
-                <button class = "btn" id = "answerThree"> Answer 3</button>
-                <button class = "btn" id = "answerFour"> Answer 4</button>
-            </div>
-            <div class="result-div">
-                <h4 class="result-h4"></h4>
+            <div id ="answer" class = "btn-grid">
+                <button type="button" class="btn btn-info" id="A" onclick = "checkAnswer('A')">A</button>
+                <button type="button" class="btn btn-info" id="B" onclick = "checkAnswer('B')">B</button>
+                <button type="button" class="btn btn-info" id="C" onclick = "checkAnswer('C')">C</button>
+                <button type="button" class="btn btn-info" id="D" onclick = "checkAnswer('D')">D</button>
+                <h6 id = "result" > result: </h6>
             </div>
         </div>
-            <button id = "start-btn" class="start-btn btn"> Start </button>
-        </div>
-
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-6 ml-auto text-center">
-                    <div class="card">
-                        <p id="scoreBoard"></p>
-                        <div class="card-body">
-                            <p class="card-text">Score:</p>
-                        </div>
-                    </div>
-                </div>
+     <div class="card-body" id = "score" style = "display :none"> score:</div>
     
-            </div>
+    <div class="card" id = "highscore" style = "display : none">
+        <h5 class="card-header">Finished Quiz</h5>
+        <div class="card-body">
+          <p class="card-text" id = "finalscore"> Final score:</p>
         </div>
-         
-
-            <div id="highscores" style = "display : none">
-                <h2>Quiz Complete</h2>
-                <h3 id="finalScore"></h3>
-                <form>
-                    <div class="form-group">
-                        <label for="userName">Enter Your Name</label>
-                        <input type="text" class="form-control" id="userName">
-                    </div>
-                </form>
+        <form>
+            <div class="form-group">
+                <label for="name">Enter Name</label>
+                <input type="text" class="form-control" id="name">
             </div>
-    </div>
+        </form>
+      </div>
     
-    <script src="./script.js"></script>
+      <script src="./script.js"></script>
 </body>
 </html>

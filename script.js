@@ -1,113 +1,127 @@
+var timer = document.getElementById('timer');
+var intro = document.getElementById('intro');
 var startButton = document.getElementById('start-btn');
-var questionContainerElement = document.getElementById('question-container');
-var questionElement = document.getElementById('question');
-var instructions = document.getElementById('instructions');
-var answerButton = document.getElementById('answer-btn');
-var answerOne = document.getElementById('answerOne');
-var answerTwo = document.getElementById('answerTwo');
-var answerThree = document.getElementById('answerThree');
-var answerFour = document.getElementById('answerFour');
-var scoreDiv = document.getElementById("scoreDiv");
-var scoreDisplay = document.getElementById("score");
-var scoreTitle = document.getElementById("scoreTitle");
-var highscores = document.getElementById("highscores");
-var scoreBoard = document.getElementById('scoreBoard');
-var quizTime= 60;
-var questionCounter = 0;
-var score = 0;
+var questionContainer = document.getElementById('question-container');
+var question = document.getElementById('question');
+var answer = document.getElementById('answer');
+var A = document.getElementById('A');
+var B = document.getElementById('B');
+var C = document.getElementById('C');
+var D = document.getElementById('D');
+var result = document.getElementById('result');
+var score = document.getElementById('score');
+var highscore = document.getElementById('highscore');
+var finalscore = document.getElementById('finalscore');
+var name = document.getElementById('name');
 
 var questions = [
-    {
-        questionOption: "what does html stand for?",
-        options: ["hypotext markeup language", "hypertext markup language", "hightext makeup language", "hypnotic text marketing line"],
-        answer: "hypertext markup language",
-    },
-    {
-        questionOption: "what does CSS stand for?",
-        options: ["cascading style sheet", "cool super style", "coding style sheet", "crazy silly soup"],
-        answer: "cascading style sheet",
-    },
-    {
-        questionOption: "what is the proper syntax to write a function named Apples?",
-        options: ["function = Apples", "function: Apples", "function Apples()", "function Apples"],
-        answer: "function Apples()",
-    }
+        {
+            questionOption: "what does html stand for?",
+            A: "hypotext markeup language",
+            B: "hypertext markup language",
+            C: "hightext makeup language",
+            D: "hypnotic text marketing line",
+            correct: "B"
+        },
+        {
+            questionOption: "what does CSS stand for?",
+            A: "cascading style sheet",
+            B: "cool super style", 
+            C: "coding style sheet",
+            D: "crazy silly soup",
+            correct: "A"
+        },
+        {
+            questionOption: "what is the proper syntax to write a function named Apples?",
+            A: "function = Apples",
+            B: "function: Apples",
+            C: "function Apples()", 
+            D: "function Apples",
+            correct: "C"
+        },
+        {
+            questionOption: "which is considered a 'real programming language'?",
+            A: "HTML",
+            B: "CSS",
+            C: "javascript",
+            D: "APIs",
+            correct: "C"
+        },
+        {
+            questionOption: "How do you link html and javascript together?",
+            A: "src= './script.js' ",
+            B: "src= javascript",
+            C: "javascript!",
+            D: "js.script = src",
+            correct: "A"
+        },
+]
 
-];
+startButton.addEventListener('click', startGame);
 
-startButton.addEventListener('click', startGame)
-
-var timeElement = document.querySelector(".time");
-var secondsLeft = 60;
+var timeLeft = 60;
+var questionCounter = 0;
+var lastQuestion = questions.length - 1;
 
 function startGame(){
-    startButton.classList.add('hide')
-    questionContainerElement.classList.remove('hide')
-    instructions.classList.add('hide')
+    intro.classList.add('hide')
+    questionContainer.classList.remove('hide')
     var timerInterval = setInterval(
         function () {
-            secondsLeft--;
-            timeElement.textContent = "Time Left: " + secondsLeft;
-            if (secondsLeft === 0) {
+            timeLeft--;
+            timer.textContent = "Time Left: " + timeLeft;
+            if (timeLeft === 0) {
                 clearInterval(timerInterval);
             }
         }
         , 1000);
-        showQuestion()
 }
 
-function showQuestion() {
-  
-    document.getElementById("question").textContent = questions[questionCounter].questionOption;
-    document.getElementById("answerOne").textContent = questions[questionCounter].options[0];
-    document.getElementById("answerTwo").textContent = questions[questionCounter].options[1];
-    document.getElementById("answerThree").textContent = questions[questionCounter].options[2];
-    document.getElementById("answerFour").textContent = questions[questionCounter].options[3];
+showQuestions();
 
-answerButton.addEventListener('click', nextQuestion)
+function showQuestions(){
+    var ques = questions[questionCounter];
+    question.textContent = ques.questionOption;
+    A.textContent = ques.A;
+    B.textContent = ques.B;
+    C.textContent = ques.C;
+    D.textContent = ques.D;
 }
 
-function nextQuestion(){
-    answerTwo.addEventListener('click', function () {
+var score = 0;
+function checkAnswer(answer){
+    if(questions[questionCounter].correct == answer){
+        score++;
+        console.log ("correct");
+        result.textContent = "correct!"
+    }else{
+        console.log("wrong");
+        result.textContent = "wrong :/ "
+        answerIsWrong();
+    }
+    if (questionCounter < lastQuestion){
+        questionCounter++;
+        showQuestions();
+    }else{
+        endQuiz();
+    }
+}
 
-         if (questionCounter == 0) {
-            score++;
-            document.getElementById("scoreBoard").textContent = scoreBoard.toString();
-            questionCounter++;
-            showQuestion();
-        } else {
-            secondsLeft-= 10;
-            document.getElementById("scoreBoard").textContent = scoreBoard.toString();
-            questionCounter++;
-            showQuestion();
-        }
-    })
-    answerOne.addEventListener('click', function () {
-       
-        if (questionCounter == 1) {
-            score++;
-            document.getElementById("scoreBoard").textContent = scoreBoard.toString();
-            questionCounter++;
-            showQuestion();
-        } else {
-            secondsLeft-= 10;
-            document.getElementById("scoreBoard").textContent = scoreBoard.toString();
-            questionCounter++;
-            showQuestion();
-        }
-    })
-    answerThree.addEventListener('click', function () {
-      
-        if (questionCounter == 2) {
-            score++;
-            document.getElementById("scoreBoard").textContent = scoreBoard.toString();
-            questionCounter++;
-            showQuestion();
-        } else {
-            secondsLeft-=10;
-            document.getElementById("scoreBoard").textContent = scoreBoard.toString();
-            questionCounter++;
-            showQuestion();
-        }
-    })
+function answerIsWrong(){
+    timeLeft -= 10;
+    if (questionCounter > lastQuestion) {
+        endQuiz();
+    } 
+    if (questionCounter < lastQuestion){
+        questionCounter++;
+        showQuestions();
+    }
+}
+function endQuiz(){
+    questionContainer.classList.add('hide')
+    highscore.style.display = "block";
+    finalscore.textContent = "Final score: " + timeLeft;
+    console.log("you finished");
+    localStorage.setItem("name",name.textContent);
+    localStorage.setItem("highscore", score); 
 }
